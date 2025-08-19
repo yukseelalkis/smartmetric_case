@@ -1,0 +1,113 @@
+{
+  "data": [
+    {
+      "customer": {
+        "id": 101,
+        "name": "Alp Demir",
+        "company": "Demir Makina",
+        "email": "alp@demirmakina.com",
+        "phone": "+90 532 000 00 01",
+        "status": "active"
+      },
+      "activities": [
+        {
+          "id": 1,
+          "type": "call",
+          "title": "Tanışma çağrısı",
+          "when": "2025-08-20T10:30:00Z"
+        },
+        {
+          "id": 2,
+          "type": "meeting",
+          "title": "Teklif sunumu",
+          "when": "2025-08-22T13:00:00Z"
+        }
+      ],
+      "notes": [
+        {
+          "id": 1,
+          "text": "Fiyat teklifi bekliyor.",
+          "created_at": "2025-08-18T09:12:00Z"
+        },
+        {
+          "id": 2,
+          "text": "Rakip ürünle kıyaslama istedi.",
+          "created_at": "2025-08-19T16:20:00Z"
+        }
+      ]
+    },
+    {
+      "customer": {
+        "id": 102,
+        "name": "Zeynep Kaya",
+        "company": "Kaya İnşaat",
+        "email": "zeynep@kaya.com",
+        "phone": "+90 532 000 00 02",
+        "status": "lead"
+      },
+      "activities": [
+        {
+          "id": 3,
+          "type": "email",
+          "title": "Tanıtım maili gönderildi",
+          "when": "2025-08-21T08:45:00Z"
+        },
+        {
+          "id": 4,
+          "type": "call",
+          "title": "Detaylı görüşme yapıldı",
+          "when": "2025-08-23T11:15:00Z"
+        }
+      ],
+      "notes": [
+        {
+          "id": 3,
+          "text": "Satış sürecine ilgi duyuyor.",
+          "created_at": "2025-08-20T14:30:00Z"
+        },
+        {
+          "id": 4,
+          "text": "Teknik doküman talep etti.",
+          "created_at": "2025-08-21T17:50:00Z"
+        }
+      ]
+    },
+    {
+      "customer": {
+        "id": 103,
+        "name": "Mehmet Yıldız",
+        "company": "Yıldız Otomotiv",
+        "email": "mehmet@yildiz.com",
+        "phone": "+90 532 000 00 03",
+        "status": "inactive"
+      },
+      "activities": [
+        {
+          "id": 5,
+          "type": "call",
+          "title": "Eski müşteri araması",
+          "when": "2025-08-19T09:00:00Z"
+        },
+        {
+          "id": 6,
+          "type": "meeting",
+          "title": "Yeniden aktivasyon toplantısı",
+          "when": "2025-08-24T15:30:00Z"
+        }
+      ],
+      "notes": [
+        {
+          "id": 5,
+          "text": "Şirket faaliyetlerini geçici olarak durdurmuş.",
+          "created_at": "2025-08-18T10:45:00Z"
+        },
+        {
+          "id": 6,
+          "text": "6 ay sonra tekrar aramamız söylendi.",
+          "created_at": "2025-08-19T12:30:00Z"
+        }
+      ]
+    }
+  ],
+  "total": 30
+}

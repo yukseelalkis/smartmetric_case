@@ -1,0 +1,249 @@
+{
+  "data": [
+    {
+      "id": 101,
+      "name": "Alp Demir",
+      "company": "Demir Makina",
+      "email": "alp@demirmakina.com",
+      "phone": "+90 532 000 00 01",
+      "status": "active"
+    },
+    {
+      "id": 102,
+      "name": "Zeynep Kaya",
+      "company": "Kaya İnşaat",
+      "email": "zeynep@kaya.com",
+      "phone": "+90 532 000 00 02",
+      "status": "lead"
+    },
+    {
+      "id": 103,
+      "name": "Mehmet Yıldız",
+      "company": "Yıldız Otomotiv",
+      "email": "mehmet@yildiz.com",
+      "phone": "+90 532 000 00 03",
+      "status": "inactive"
+    },
+    {
+      "id": 104,
+      "name": "Ayşe Çelik",
+      "company": "Çelik Mobilya",
+      "email": "ayse@celik.com",
+      "phone": "+90 532 000 00 04",
+      "status": "active"
+    },
+    {
+      "id": 105,
+      "name": "Hasan Arslan",
+      "company": "Arslan Tekstil",
+      "email": "hasan@arslan.com",
+      "phone": "+90 532 000 00 05",
+      "status": "active"
+    },
+    {
+      "id": 106,
+      "name": "Elif Güneş",
+      "company": "Güneş Elektrik",
+      "email": "elif@gunes.com",
+      "phone": "+90 532 000 00 06",
+      "status": "lead"
+    },
+    {
+      "id": 107,
+      "name": "Burak Şahin",
+      "company": "Şahin Yazılım",
+      "email": "burak@sahin.com",
+      "phone": "+90 532 000 00 07",
+      "status": "active"
+    },
+    {
+      "id": 108,
+      "name": "Selin Doğan",
+      "company": "Doğan Emlak",
+      "email": "selin@dogan.com",
+      "phone": "+90 532 000 00 08",
+      "status": "inactive"
+    },
+    {
+      "id": 109,
+      "name": "Ahmet Aksoy",
+      "company": "Aksoy Lojistik",
+      "email": "ahmet@aksoy.com",
+      "phone": "+90 532 000 00 09",
+      "status": "lead"
+    },
+    {
+      "id": 110,
+      "name": "Gamze Yılmaz",
+      "company": "Yılmaz Eğitim",
+      "email": "gamze@yilmaz.com",
+      "phone": "+90 532 000 00 10",
+      "status": "active"
+    },
+
+    {
+      "id": 111,
+      "name": "Cem Karaca",
+      "company": "Karaca Bilişim",
+      "email": "cem@karaca.com",
+      "phone": "+90 532 000 00 11",
+      "status": "lead"
+    },
+    {
+      "id": 112,
+      "name": "Deniz Acar",
+      "company": "Acar Danışmanlık",
+      "email": "deniz@acar.com",
+      "phone": "+90 532 000 00 12",
+      "status": "active"
+    },
+    {
+      "id": 113,
+      "name": "Melis Özkan",
+      "company": "Özkan Sigorta",
+      "email": "melis@ozkan.com",
+      "phone": "+90 532 000 00 13",
+      "status": "inactive"
+    },
+    {
+      "id": 114,
+      "name": "Eren Kılıç",
+      "company": "Kılıç Metal",
+      "email": "eren@kilic.com",
+      "phone": "+90 532 000 00 14",
+      "status": "active"
+    },
+    {
+      "id": 115,
+      "name": "Hakan Bal",
+      "company": "Bal Gıda",
+      "email": "hakan@bal.com",
+      "phone": "+90 532 000 00 15",
+      "status": "lead"
+    },
+    {
+      "id": 116,
+      "name": "Cansu Polat",
+      "company": "Polat Kozmetik",
+      "email": "cansu@polat.com",
+      "phone": "+90 532 000 00 16",
+      "status": "inactive"
+    },
+    {
+      "id": 117,
+      "name": "Murat Er",
+      "company": "Er Medya",
+      "email": "murat@er.com",
+      "phone": "+90 532 000 00 17",
+      "status": "active"
+    },
+    {
+      "id": 118,
+      "name": "Yasemin Sarı",
+      "company": "Sarı Moda",
+      "email": "yasemin@sari.com",
+      "phone": "+90 532 000 00 18",
+      "status": "active"
+    },
+    {
+      "id": 119,
+      "name": "Tolga Uzun",
+      "company": "Uzun Mühendislik",
+      "email": "tolga@uzun.com",
+      "phone": "+90 532 000 00 19",
+      "status": "inactive"
+    },
+    {
+      "id": 120,
+      "name": "Pelin Kurt",
+      "company": "Kurt Tasarım",
+      "email": "pelin@kurt.com",
+      "phone": "+90 532 000 00 20",
+      "status": "lead"
+    },
+
+    {
+      "id": 121,
+      "name": "Onur Tekin",
+      "company": "Tekin Spor",
+      "email": "onur@tekin.com",
+      "phone": "+90 532 000 00 21",
+      "status": "active"
+    },
+    {
+      "id": 122,
+      "name": "Buse Yıldırım",
+      "company": "Yıldırım Enerji",
+      "email": "buse@yildirim.com",
+      "phone": "+90 532 000 00 22",
+      "status": "lead"
+    },
+    {
+      "id": 123,
+      "name": "Emre Can",
+      "company": "Can İnşaat",
+      "email": "emre@can.com",
+      "phone": "+90 532 000 00 23",
+      "status": "inactive"
+    },
+    {
+      "id": 124,
+      "name": "Sevgi Yurt",
+      "company": "Yurt Sağlık",
+      "email": "sevgi@yurt.com",
+      "phone": "+90 532 000 00 24",
+      "status": "active"
+    },
+    {
+      "id": 125,
+      "name": "Okan Sezer",
+      "company": "Sezer Tarım",
+      "email": "okan@sezer.com",
+      "phone": "+90 532 000 00 25",
+      "status": "active"
+    },
+    {
+      "id": 126,
+      "name": "Esra Duru",
+      "company": "Duru Ajans",
+      "email": "esra@duru.com",
+      "phone": "+90 532 000 00 26",
+      "status": "inactive"
+    },
+    {
+      "id": 127,
+      "name": "Baran Efe",
+      "company": "Efe Yazılım",
+      "email": "baran@efe.com",
+      "phone": "+90 532 000 00 27",
+      "status": "lead"
+    },
+    {
+      "id": 128,
+      "name": "Nazlı Koç",
+      "company": "Koç Turizm",
+      "email": "nazli@koc.com",
+      "phone": "+90 532 000 00 28",
+      "status": "active"
+    },
+    {
+      "id": 129,
+      "name": "Furkan Öz",
+      "company": "Öz Reklam",
+      "email": "furkan@oz.com",
+      "phone": "+90 532 000 00 29",
+      "status": "inactive"
+    },
+    {
+      "id": 130,
+      "name": "Eda Uçar",
+      "company": "Uçar Danışmanlık",
+      "email": "eda@ucar.com",
+      "phone": "+90 532 000 00 30",
+      "status": "lead"
+    }
+  ],
+  "page": 1,
+  "total": 50,
+  "limit": 50
+}
