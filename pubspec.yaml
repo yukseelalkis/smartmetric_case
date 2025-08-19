@@ -42,8 +42,8 @@ dependencies:
   common:
     path: module/common
 
-  # gen:
-  #   path: module/gen
+  gen:
+    path: module/gen
 
   cupertino_icons: ^1.0.8
 
