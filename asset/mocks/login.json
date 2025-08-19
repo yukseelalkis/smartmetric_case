@@ -1,0 +1,16 @@
+{
+  "isSuccess": true,
+  "data": {
+    "token": "mock_token_123",
+    "user": {
+      "id": 1,
+      "email": "test@test.com",
+      "password": "123456",
+      "name": "Test User"
+    }
+  },
+  "response": {
+    "success": true,
+    "message": "Login successful"
+  }
+}

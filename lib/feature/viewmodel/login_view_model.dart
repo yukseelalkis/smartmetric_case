@@ -1,10 +1,15 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:gen/gen.dart';
 import 'package:logger/logger.dart';
+import 'package:smartmetric_case/feature/view/auth/auth_repository.dart';
 import 'package:smartmetric_case/product/init/cache/cache_manager.dart';
-import 'package:smartmetric_case/product/service/common_service.dart';
+import 'package:smartmetric_case/product/service/mock_service/mock_service.dart';
 import 'package:smartmetric_case/product/state/base/base_cubit';
 import 'package:smartmetric_case/product/state/login_state.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/cache_allow_list.dart';
+import 'package:smartmetric_case/product/utility/constant/enums/status_code.dart';
 import 'package:smartmetric_case/product/utility/response/api_response.dart';
 
 /// [LoginViewModel] is the view model for the login view.
@@ -16,23 +21,20 @@ final class LoginViewModel extends BaseCubit<LoginState> {
     emit(state.copyWith(isLoading: !state.isLoading));
   }
 
-  Future<ApiResponse<LoginResponse>> login(
-      {required LoginRequest loginRequest}) async {
+  final _repo = const AuthRepository();
+
+  Future<ApiResponse<LoginResponse>> login({
+    required LoginRequest loginRequest,
+  }) async {
     _changeLoading();
     try {
-      var response =
-          await CommonService.instance.postModel<LoginRequest, LoginResponse>(
-        domain: DevEnv().postAuthLoginDomain,
-        model: loginRequest,
-        fromJson: (json) => LoginResponse.fromJson(json),
-      );
-
+      final res = await _repo.login(loginRequest);
       _changeLoading();
-
-      return response;
+      return res;
     } catch (e) {
-      Logger().e(e.toString());
-      rethrow;
+      _changeLoading();
+      return ApiResponse.failure(
+          error: e.toString(), result: HttpResult.unknown);
     }
   }
 

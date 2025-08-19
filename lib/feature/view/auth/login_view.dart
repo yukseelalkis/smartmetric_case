@@ -6,12 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:common/common.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gen/gen.dart';
+import 'package:logger/logger.dart';
+import 'package:smartmetric_case/feature/view/home_view.dart';
 import 'package:smartmetric_case/feature/view/mixin/auth/auth_common_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/mixin/auth/login_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/mixin/common_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/transparent_view.dart';
+import 'package:smartmetric_case/feature/view/widget/custom_snackbar.dart';
 import 'package:smartmetric_case/feature/viewmodel/login_view_model.dart';
 import 'package:smartmetric_case/product/state/login_state.dart';
+import 'package:smartmetric_case/product/utility/constant/enums/response_type.dart';
 
 import '../../../product/init/language/locale_keys.g.dart';
 
@@ -50,7 +54,7 @@ final class _LoginViewState extends State<LoginView>
                           child: Column(
                             children: [
                               Text(
-                                LocaleKeys.auth_hello,
+                                LocaleKeys.auth_hello.tr(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge
@@ -104,7 +108,7 @@ final class _LoginViewState extends State<LoginView>
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               CustomElevatedButton(
-                                onPressed: () {},
+                                onPressed: loginOnPress,
                                 child: Text(
                                   LocaleKeys.auth_login.tr(),
                                   style: Theme.of(context)
@@ -148,32 +152,72 @@ final class _LoginViewState extends State<LoginView>
     );
   }
 
-  // void loginOnPress() async {
-  //   if (!mounted || !isFormValid(loginFormKey)) return;
+  void loginOnPress() async {
+    if (!mounted || !isFormValid(loginFormKey)) return;
 
-  //   final user = LoginRequest(
-  //     email: emailController.text,
-  //     password: passwordController.text,
-  //   );
-  //   final res = await loginViewModel.login(loginRequest: user);
-  //   if (res.isSuccess) {
-  //     await loginViewModel.setRememberMeToSP(
-  //       rememberMe: true,
-  //     );
+    final user = LoginRequest(
+      email: emailController.text,
+      password: passwordController.text,
+    );
 
-  //     await loginViewModel.setTokenToSP(token: res.data?.data?.token ?? '');
+    final res = await loginViewModel.login(loginRequest: user);
 
-  //     await context.router.pushAndPopUntil(
-  //       const DashboardWrapperRoute(),
-  //       predicate: (route) => false,
-  //     );
-  //   } else {
-  //     CustomSnackbar.show(
-  //       context: context,
-  //       message:
-  //           res.data?.response?.message ?? LocaleKeys.error_unknown_error.tr(),
-  //       responseType: ResponseType.error,
-  //     );
-  //   }
-  // }
+    // 🔥 Debug log ekleyelim
+    Logger().i("Login Response -> $res");
+    Logger().i("Error -> ${res.error}");
+    Logger().i("Response Message -> ${res.data?.response?.message}");
+
+    if (res.isSuccess) {
+      await loginViewModel.setRememberMeToSP(rememberMe: true);
+      await loginViewModel.setTokenToSP(token: res.data?.data?.token ?? '');
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeView(),
+        ),
+      );
+    } else {
+      CustomSnackbar.show(
+        context: context,
+        message: res.data?.response?.message ??
+            res.error ??
+            LocaleKeys.error_unknown_error.tr(),
+        responseType: ResponseType.error,
+      );
+    }
+  }
 }
+//   void loginOnPress() async {
+//     if (!mounted || !isFormValid(loginFormKey)) return;
+
+//     final user = LoginRequest(
+//       email: emailController.text,
+//       password: passwordController.text,
+//     );
+
+//     final res = await loginViewModel.login(loginRequest: user);
+
+//     if (res.isSuccess) {
+//       await loginViewModel.setRememberMeToSP(
+//         rememberMe: true,
+//       );
+
+//       await loginViewModel.setTokenToSP(
+//         token: res.data?.data?.token ?? '',
+//       );
+
+//       // await context.router.pushAndPopUntil(
+//       //   const DashboardWrapperRoute(),
+//       //   predicate: (route) => false,
+//       // );
+//     } else {
+//       CustomSnackbar.show(
+//         context: context,
+//         message:
+//             res.data?.response?.message ?? LocaleKeys.error_unknown_error.tr(),
+//         responseType: ResponseType.error,
+//       );
+//     }
+//   }
+// }
