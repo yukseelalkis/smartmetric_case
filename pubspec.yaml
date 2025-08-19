@@ -39,8 +39,8 @@ dependencies:
   flutter_bloc: ^9.1.1
 
   # # ** Private Packages **
-  # common:
-  #   path: module/common
+  common:
+    path: module/common
 
   # gen:
   #   path: module/gen
