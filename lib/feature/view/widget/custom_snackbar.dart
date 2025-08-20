@@ -32,7 +32,6 @@ final class CustomSnackbar {
     );
   }
 
-  /// Method to get the background and text color based on the response type
   static _SnackbarColors _getSnackbarColors(
       BuildContext context, ResponseType type) {
     final theme = Theme.of(context);

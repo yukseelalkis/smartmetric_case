@@ -10,11 +10,8 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
     super.initState();
-    // ilk yükleme
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<HomeViewModel>().initLoad();
-    });
-    // debounce’lu arama
+
+    // ✅ sadece debounce'lu arama — ilk yükleme HomeView'da create: ..initLoad()
     searchCtrl.addListener(() {
       _debounce?.cancel();
       _debounce = Timer(const Duration(milliseconds: 300), () {
