@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gen/gen.dart'; // PagedCustomers, CustomerStatus
 import 'package:smartmetric_case/feature/repo/customer_repository.dart';
+import 'package:smartmetric_case/feature/view/common/customer_detail_view.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/status_filter.dart';
 import 'package:smartmetric_case/product/utility/response/api_response.dart';
 
@@ -117,11 +118,23 @@ class _HomeViewState extends State<HomeView> {
                   separatorBuilder: (_, __) => const SizedBox(height: 12),
                   itemBuilder: (_, i) {
                     final c = items[i];
+                    // ... HomeView içindeki itemBuilder:
                     return UserStatusTile(
                       name: c.name,
                       email: c.email,
+                      company: c.company,
                       isActive: c.status == CustomerStatus.active,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => CustomerDetailView(
+                              customerName: c.name,
+                              customId: c.id,
+                              fallback: c, // repo dosyası yoksa bunu gösterir
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
                 );
@@ -211,7 +224,7 @@ class _SearchField extends StatelessWidget {
               controller: controller,
               textInputAction: TextInputAction.search,
               decoration: const InputDecoration(
-                hintText: 'search name...', // sadece isme göre
+                hintText: 'search name or company...',
                 border: InputBorder.none,
                 isCollapsed: true,
               ),
@@ -236,17 +249,18 @@ class _SearchField extends StatelessWidget {
   }
 }
 
-// ---- Liste elemanı (seninki) ----
 class UserStatusTile extends StatelessWidget {
   const UserStatusTile({
     super.key,
     required this.name,
+    required this.company, // ✅ eklendi
     required this.email,
     required this.isActive,
     this.onTap,
   });
 
   final String name;
+  final String company; // ✅ eklendi
   final String email;
   final bool isActive;
   final VoidCallback? onTap;
@@ -274,6 +288,7 @@ class UserStatusTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // 1) İsim
                     Text(
                       name,
                       maxLines: 1,
@@ -283,6 +298,17 @@ class UserStatusTile extends StatelessWidget {
                           ),
                     ),
                     const SizedBox(height: 2),
+                    // 2) Şirket
+                    Text(
+                      company,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
+                    const SizedBox(height: 2),
+                    // 3) E-posta
                     Text(
                       email,
                       maxLines: 1,
@@ -299,7 +325,7 @@ class UserStatusTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              _StatusPill(isActive: isActive),
+              StatusPill(isActive: isActive),
             ],
           ),
         ),
@@ -308,8 +334,8 @@ class UserStatusTile extends StatelessWidget {
   }
 }
 
-class _StatusPill extends StatelessWidget {
-  const _StatusPill({required this.isActive});
+class StatusPill extends StatelessWidget {
+  const StatusPill({required this.isActive});
   final bool isActive;
 
   @override
