@@ -18,6 +18,6 @@ final class DecidedTheTheme {
     );
     final theme = CustomColorScheme(textTheme);
 
-    return brightness != Brightness.light ? theme.light() : theme.dark();
+    return brightness != Brightness.light ? theme.dark() : theme.light();
   }
 }

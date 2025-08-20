@@ -6,3 +6,4 @@ export 'response.dart';
 export 'signup_request.dart';
 export 'signup_response.dart';
 export 'user.dart';
+export 'customer_data.dart';

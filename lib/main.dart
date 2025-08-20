@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smartmetric_case/feature/view/auth/login_view.dart';
 import 'package:smartmetric_case/feature/view/auth/sign_up_view.dart';
+import 'package:smartmetric_case/feature/view/home/home_view.dart';
 import 'package:smartmetric_case/product/init/application_initialize.dart';
 import 'package:smartmetric_case/product/init/language/product_localization.dart';
 import 'package:smartmetric_case/product/init/theme/decided_the_theme.dart';
@@ -34,7 +35,7 @@ class SmartMetricsCase extends StatelessWidget {
       locale: context.locale,
       debugShowCheckedModeBanner: false,
       theme: DecidedTheTheme.themeConfiguration(context),
-      home: const LoginView(),
+      home: const HomeView(),
     );
   }
 }

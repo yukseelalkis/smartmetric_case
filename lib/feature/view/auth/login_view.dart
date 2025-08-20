@@ -7,7 +7,7 @@ import 'package:common/common.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gen/gen.dart';
 import 'package:logger/logger.dart';
-import 'package:smartmetric_case/feature/view/home_view.dart';
+import 'package:smartmetric_case/feature/view/home/home_view.dart';
 import 'package:smartmetric_case/feature/view/mixin/auth/auth_common_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/mixin/auth/login_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/mixin/common_view_mixin.dart';

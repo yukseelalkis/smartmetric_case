@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:gen/gen.dart';
 import 'package:smartmetric_case/product/service/mock_service/mock_service.dart';
-
 import 'package:smartmetric_case/product/utility/response/api_response.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/status_code.dart';
 
@@ -15,7 +14,6 @@ final class AuthRepository {
     final root = json.decode(jsonString) as Map<String, dynamic>;
     final data = root['data'] as Map<String, dynamic>;
     final user = data['user'] as Map<String, dynamic>;
-
     final email = user['email'] as String?;
     final password = user['password'] as String?;
 
