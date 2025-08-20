@@ -1,39 +1,42 @@
 import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:common/common.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gen/gen.dart';
-import 'package:logger/logger.dart';
 import 'package:smartmetric_case/feature/view/home_view.dart';
 import 'package:smartmetric_case/feature/view/mixin/auth/auth_common_view_mixin.dart';
-import 'package:smartmetric_case/feature/view/mixin/auth/login_view_mixin.dart';
+import 'package:smartmetric_case/feature/view/mixin/auth/sign_up_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/mixin/common_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/transparent_view.dart';
 import 'package:smartmetric_case/feature/view/widget/custom_snackbar.dart';
-import 'package:smartmetric_case/feature/viewmodel/login_view_model.dart';
-import 'package:smartmetric_case/product/state/login_state.dart';
+import 'package:smartmetric_case/feature/viewmodel/signup_view_model.dart';
+import 'package:smartmetric_case/product/init/language/locale_keys.g.dart';
+import 'package:smartmetric_case/product/state/sign_up_state.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/response_type.dart';
 
-import '../../../product/init/language/locale_keys.g.dart';
-
-/// [LoginView] is a class that contains the login view.
+/// [SignUp] is a class that contains the login view.
 @RoutePage()
-final class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+final class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-final class _LoginViewState extends State<LoginView>
-    with AuthCommonViewMixin, LoginViewMixin, DeviceSizeMixin, CommonViewMixin {
+final class _SignUpViewState extends State<SignUpView>
+    with
+        AuthCommonViewMixin,
+        DeviceSizeMixin,
+        CommonViewMixin,
+        SignUpViewMixin {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => loginViewModel,
+      create: (context) => signupViewModel,
       child: GestureDetector(
         onTap: () => gestureOnTap(context),
         child: Scaffold(
@@ -45,7 +48,7 @@ final class _LoginViewState extends State<LoginView>
                   padding:
                       PaddingManager.normalPaddingSymmetricHorizontal(context),
                   child: Form(
-                    key: loginFormKey,
+                    key: signupFormKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -54,7 +57,7 @@ final class _LoginViewState extends State<LoginView>
                           child: Column(
                             children: [
                               Text(
-                                LocaleKeys.auth_hello.tr(),
+                                LocaleKeys.auth_hello,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge
@@ -66,9 +69,19 @@ final class _LoginViewState extends State<LoginView>
                           ),
                         ),
                         Expanded(
-                          flex: 1,
+                          flex: 3,
                           child: Column(
                             children: [
+                              CustomTextFormField(
+                                controller: fullnameController,
+                                prefixIcon: const Icon(Icons.person),
+                                labelText: LocaleKeys.auth_fullname.tr(),
+                                hintText:
+                                    LocaleKeys.auth_fullname_placeholder.tr(),
+                                keyboardType: TextInputType.name,
+                                textInputAction: TextInputAction.next,
+                                validator: fullnameValidator,
+                              ),
                               CustomTextFormField(
                                 controller: emailController,
                                 prefixIcon: const Icon(Icons.email_outlined),
@@ -81,36 +94,43 @@ final class _LoginViewState extends State<LoginView>
                               ),
                               CustomTextFormField(
                                 controller: passwordController,
-                                prefixIcon: const Icon(Icons.email_outlined),
+                                prefixIcon: const Icon(Icons.password),
                                 labelText: LocaleKeys.auth_password.tr(),
                                 hintText:
                                     LocaleKeys.auth_password_placeholder.tr(),
-                                keyboardType: TextInputType.emailAddress,
+                                keyboardType: TextInputType.visiblePassword,
                                 textInputAction: TextInputAction.next,
                                 obscureText: true,
                                 // validator: passwordValidator, //! The api does not require password validation but this could be useful in the future
                               ),
+                              CustomTextFormField(
+                                controller: confirmPasswordController,
+                                prefixIcon: const Icon(Icons.lock_outline),
+                                labelText:
+                                    LocaleKeys.auth_confirm_password.tr(),
+                                hintText: LocaleKeys
+                                    .auth_confirm_password_placeholder
+                                    .tr(),
+                                keyboardType: TextInputType.visiblePassword,
+                                textInputAction: TextInputAction.next,
+
+                                obscureText: true,
+                                // validator: (value) =>
+                                //     confirmPasswordValidator(value, passwordController.text), //! The api does not require password validation but this could be useful in the future
+                              ),
                             ],
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              LocaleKeys.auth_forgot_password.tr(),
-                            ),
-                          ),
-                        ),
+                        // const _UserAgreementText(),
                         Expanded(
                           flex: 2,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               CustomElevatedButton(
-                                onPressed: loginOnPress,
+                                onPressed: _signUpOnPress,
                                 child: Text(
-                                  LocaleKeys.auth_login.tr(),
+                                  LocaleKeys.auth_register.tr(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelLarge
@@ -121,14 +141,12 @@ final class _LoginViewState extends State<LoginView>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(LocaleKeys
-                                          .auth_do_not_have_an_account)
+                                          .auth_i_have_already_have_an_account)
                                       .tr(),
                                   TextButton(
-                                    onPressed: () async {
-                                      
-                                    },
+                                    onPressed: () {},
                                     child: Text(
-                                      LocaleKeys.auth_register.tr(),
+                                      LocaleKeys.auth_login.tr(),
                                     ),
                                   )
                                 ],
@@ -140,7 +158,7 @@ final class _LoginViewState extends State<LoginView>
                     ),
                   ),
                 ),
-                TransparentScreen<LoginViewModel, LoginState>(
+                TransparentScreen<SignUpViewModel, SignUpState>(
                   child: const Center(
                     child: CircularProgressIndicator.adaptive(),
                   ),
@@ -154,25 +172,18 @@ final class _LoginViewState extends State<LoginView>
     );
   }
 
-  void loginOnPress() async {
-    if (!mounted || !isFormValid(loginFormKey)) return;
+  Future<void> _signUpOnPress() async {
+    if (!mounted || !isFormValid(signupFormKey)) return;
 
-    final user = LoginRequest(
+    final req = SignupRequest(
       email: emailController.text,
+      name: fullnameController.text,
       password: passwordController.text,
     );
 
-    final res = await loginViewModel.login(loginRequest: user);
-
-    // 🔥 Debug log ekleyelim
-    Logger().i("Login Response -> $res");
-    Logger().i("Error -> ${res.error}");
-    Logger().i("Response Message -> ${res.data?.response?.message}");
+    final res = await signupViewModel.signup(signupRequest: req);
 
     if (res.isSuccess) {
-      await loginViewModel.setRememberMeToSP(rememberMe: true);
-      await loginViewModel.setTokenToSP(token: res.data?.data?.token ?? '');
-
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -182,44 +193,9 @@ final class _LoginViewState extends State<LoginView>
     } else {
       CustomSnackbar.show(
         context: context,
-        message: res.data?.response?.message ??
-            res.error ??
-            LocaleKeys.error_unknown_error.tr(),
+        message: res.error ?? LocaleKeys.error_unknown_error.tr(),
         responseType: ResponseType.error,
       );
     }
   }
 }
-//   void loginOnPress() async {
-//     if (!mounted || !isFormValid(loginFormKey)) return;
-
-//     final user = LoginRequest(
-//       email: emailController.text,
-//       password: passwordController.text,
-//     );
-
-//     final res = await loginViewModel.login(loginRequest: user);
-
-//     if (res.isSuccess) {
-//       await loginViewModel.setRememberMeToSP(
-//         rememberMe: true,
-//       );
-
-//       await loginViewModel.setTokenToSP(
-//         token: res.data?.data?.token ?? '',
-//       );
-
-//       // await context.router.pushAndPopUntil(
-//       //   const DashboardWrapperRoute(),
-//       //   predicate: (route) => false,
-//       // );
-//     } else {
-//       CustomSnackbar.show(
-//         context: context,
-//         message:
-//             res.data?.response?.message ?? LocaleKeys.error_unknown_error.tr(),
-//         responseType: ResponseType.error,
-//       );
-//     }
-//   }
-// }
