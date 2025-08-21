@@ -1,6 +1,6 @@
 // lib/feature/viewmodel/home_view_model.dart
 import 'package:gen/gen.dart'; // PagedCustomers, CustomerStatus
-import 'package:smartmetric_case/feature/repo/customer_repository.dart';
+import 'package:smartmetric_case/product/repo/customer_repository.dart';
 import 'package:smartmetric_case/product/state/base/base_cubit';
 import 'package:smartmetric_case/product/state/home_state.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/status_filter.dart';

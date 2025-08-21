@@ -2,21 +2,18 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:gen/gen.dart'; // Customer, PagedCustomers, CustomerStatus
+import 'package:smartmetric_case/product/utility/constant/enums/mock_enums.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/status_code.dart';
 import 'package:smartmetric_case/product/utility/constant/search_norm.dart';
 import 'package:smartmetric_case/product/utility/response/api_response.dart';
 
 final class CustomerRepository {
-  static const String _listPath = 'asset/mocks/custommer.json';
-  static const String _detailsPath = 'asset/mocks/customer_detail.json';
-
-  /// Listeyi getirir (opsiyonel status + isim/şirket arama).
   Future<ApiResponse<PagedCustomers>> getCustomers({
     CustomerStatus? status,
     String? query,
   }) async {
     try {
-      final raw = await rootBundle.loadString(_listPath);
+      final raw = await rootBundle.loadString(MockAssets.customer.path);
       final map = json.decode(raw) as Map<String, dynamic>;
       final full = PagedCustomers.fromJson(map);
 
@@ -52,7 +49,7 @@ final class CustomerRepository {
   /// Sade detay: tek dosyadan id’ye göre bulup sadece Customer döner.
   Future<ApiResponse<Customer>> getCustomerDetail(int id) async {
     try {
-      final raw = await rootBundle.loadString(_detailsPath);
+      final raw = await rootBundle.loadString(MockAssets.customerDetail.path);
       final root = json.decode(raw) as Map<String, dynamic>;
       final list = (root['data'] as List).cast<Map<String, dynamic>>();
 
@@ -79,7 +76,7 @@ final class CustomerRepository {
   /// Full detay: customer + activities + notes.
   Future<ApiResponse<CustomerDetail>> getCustomerFull(int id) async {
     try {
-      final raw = await rootBundle.loadString(_detailsPath);
+      final raw = await rootBundle.loadString(MockAssets.customerDetail.path);
       final root = json.decode(raw) as Map<String, dynamic>;
       final list = (root['data'] as List).cast<Map<String, dynamic>>();
 

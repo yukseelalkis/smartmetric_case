@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:gen/gen.dart';
 import 'package:logger/logger.dart';
-import 'package:smartmetric_case/feature/repo/auth_repository.dart';
+import 'package:smartmetric_case/product/repo/auth_repository.dart';
 import 'package:smartmetric_case/product/init/cache/cache_manager.dart';
 import 'package:smartmetric_case/product/service/mock_service/mock_service.dart';
 import 'package:smartmetric_case/product/state/base/base_cubit';

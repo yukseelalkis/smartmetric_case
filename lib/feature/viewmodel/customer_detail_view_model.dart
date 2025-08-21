@@ -1,6 +1,6 @@
 // lib/feature/customer_detail/viewmodel/customer_detail_view_model.dart
 import 'package:gen/gen.dart'; // Customer
-import 'package:smartmetric_case/feature/repo/customer_repository.dart';
+import 'package:smartmetric_case/product/repo/customer_repository.dart';
 import 'package:smartmetric_case/product/state/base/base_cubit';
 import 'package:smartmetric_case/product/state/customer_detail.dart';
 
