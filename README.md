@@ -16,6 +16,7 @@ Kullanılan teknolojiler:
 - **Dio** (HTTP client)
 - **Light / Dark tema desteği**
 - **Mock veri** (assets/mocks)
+- **Localization (easy_localization)** → Çoklu dil desteği
 
 ---
 
