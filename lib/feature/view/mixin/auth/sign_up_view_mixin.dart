@@ -42,6 +42,8 @@ mixin SignUpViewMixin on State<SignUpView> {
     _confirmPasswordController = TextEditingController();
   }
 
+  
+
   @override
   void dispose() {
     _fullnameController.dispose();

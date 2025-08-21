@@ -6,6 +6,7 @@ import 'package:smartmetric_case/feature/view/home/home_view.dart';
 import 'package:smartmetric_case/product/init/application_initialize.dart';
 import 'package:smartmetric_case/product/init/language/product_localization.dart';
 import 'package:smartmetric_case/product/init/theme/decided_the_theme.dart';
+import 'package:smartmetric_case/product/navigation/app_router.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/smartmetric.dart';
 
 Future<void> main() async {
@@ -25,17 +26,18 @@ Future<void> main() async {
 
 class SmartMetricsCase extends StatelessWidget {
   const SmartMetricsCase({super.key});
+  static final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: Smartmetrics.smartmetric.name,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
       theme: DecidedTheTheme.themeConfiguration(context),
-      home: const HomeView(),
+      routerConfig: _appRouter.config(),
     );
   }
 }

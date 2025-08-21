@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gen/gen.dart';
-import 'package:smartmetric_case/feature/view/home/home_view.dart';
 import 'package:smartmetric_case/feature/view/mixin/auth/auth_common_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/mixin/auth/sign_up_view_mixin.dart';
 import 'package:smartmetric_case/feature/view/mixin/common_view_mixin.dart';
@@ -15,10 +11,11 @@ import 'package:smartmetric_case/feature/view/transparent_view.dart';
 import 'package:smartmetric_case/feature/view/widget/custom_snackbar.dart';
 import 'package:smartmetric_case/feature/viewmodel/signup_view_model.dart';
 import 'package:smartmetric_case/product/init/language/locale_keys.g.dart';
+import 'package:smartmetric_case/product/navigation/app_router.dart';
 import 'package:smartmetric_case/product/state/sign_up_state.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/response_type.dart';
 
-/// [SignUp] is a class that contains the login view.
+/// [SignUpView] is a class that contains the signup view.
 @RoutePage()
 final class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -101,7 +98,6 @@ final class _SignUpViewState extends State<SignUpView>
                                 keyboardType: TextInputType.visiblePassword,
                                 textInputAction: TextInputAction.next,
                                 obscureText: true,
-                                // validator: passwordValidator, //! The api does not require password validation but this could be useful in the future
                               ),
                               CustomTextFormField(
                                 controller: confirmPasswordController,
@@ -112,16 +108,12 @@ final class _SignUpViewState extends State<SignUpView>
                                     .auth_confirm_password_placeholder
                                     .tr(),
                                 keyboardType: TextInputType.visiblePassword,
-                                textInputAction: TextInputAction.next,
-
+                                textInputAction: TextInputAction.done,
                                 obscureText: true,
-                                // validator: (value) =>
-                                //     confirmPasswordValidator(value, passwordController.text), //! The api does not require password validation but this could be useful in the future
                               ),
                             ],
                           ),
                         ),
-                        // const _UserAgreementText(),
                         Expanded(
                           flex: 2,
                           child: Column(
@@ -144,7 +136,12 @@ final class _SignUpViewState extends State<SignUpView>
                                           .auth_i_have_already_have_an_account)
                                       .tr(),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      // Signup -> Login yönlendirmesi
+                                      await context.router.replace(
+                                        const LoginRoute(),
+                                      );
+                                    },
                                     child: Text(
                                       LocaleKeys.auth_login.tr(),
                                     ),
@@ -184,11 +181,10 @@ final class _SignUpViewState extends State<SignUpView>
     final res = await signupViewModel.signup(signupRequest: req);
 
     if (res.isSuccess) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomeView(),
-        ),
+      // Signup başarılı -> Home aç
+      await context.router.pushAndPopUntil(
+        const HomeRoute(),
+        predicate: (_) => false,
       );
     } else {
       CustomSnackbar.show(

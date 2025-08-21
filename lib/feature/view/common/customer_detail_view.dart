@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ import 'package:smartmetric_case/feature/view/widget/note_list.dart';
 import 'package:smartmetric_case/feature/viewmodel/customer_detail_view_model.dart';
 import 'package:smartmetric_case/product/state/customer_detail.dart';
 import 'package:smartmetric_case/product/utility/constant/enums/response_type.dart';
-
+@RoutePage()   
 class CustomerDetailView extends StatefulWidget {
   const CustomerDetailView({
     super.key,

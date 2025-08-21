@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:smartmetric_case/product/utility/constant/enums/status_filter.da
 import 'package:smartmetric_case/feature/view/transparent_view.dart';
 import 'package:smartmetric_case/feature/view/mixin/common_view_mixin.dart';
 
+@RoutePage()
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
   @override
